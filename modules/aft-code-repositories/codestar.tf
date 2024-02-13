@@ -1,6 +1,12 @@
 # Copyright Amazon.com, Inc. or its affiliates. All rights reserved.
 # SPDX-License-Identifier: Apache-2.0
 #
+resource "aws_codestarconnections_connection" "gitlab" {
+  count         = local.vcs.is_gitlab ? 1 : 0
+  name          = "ct-aft-gitlab-connection"
+  provider_type = "GitLab"
+}
+
 resource "aws_codestarconnections_connection" "bitbucket" {
   count         = local.vcs.is_bitbucket ? 1 : 0
   name          = "ct-aft-bitbucket-connection"
